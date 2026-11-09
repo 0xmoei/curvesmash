@@ -349,8 +349,7 @@ NBAR_COUNT=4+17*G_GROUPS+1
 NBAR_ALLOW=12381
 PHASE_CTRL_G=297025
 KB130=KB(D1+D2+HB)
-# C130 (success.md 6.6): ROWMAX130 = max_c sum_k M(c + k 2^58), M(i) = max npad(i-1..i+1); M is affine between npad's
-# breakpoints +-2, so the sum is affine between these candidates (+-3 mod 2^58, 0, 2^58 - 1) and peaks at one
+# C130 (success.md 6.6): row sums of M(i) = max npad(i-1..i+1) are affine between these candidates; max at one
 def rowsum130(c,m=2**64,sh=2**58):
  return sum(max(npad((c+k*sh+e)%m,m)for e in (-1,0,1))for k in range(m//sh))
 def rowmax130(m=2**64,sh=2**58):
